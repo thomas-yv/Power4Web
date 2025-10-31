@@ -1,11 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUISSANCE 4</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{.Title}}</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #fafafa; }
+    table { margin: auto; border-collapse: collapse; }
+    td {
+      width: 60px; height: 60px; border-radius: 50%;
+      border: 2px solid #333; background: #eee;
+    }
+    .p1 { background: red; }
+    .p2 { background: yellow; }
+    button { margin: 5px; padding: 5px 10px; }
+  </style>
 </head>
 <body>
-<h1>{{.Title}}</h1>
+  <h1>{{.Title}}</h1>
+
+  {{if .Win.IsWin}}
+    <h2>🎉 Joueur {{.Win.Winner}} a gagné !</h2>
+  {{else if .Win.IsDraw}}
+    <h2>🤝 Match nul !</h2>
+  {{else}}
+    <h2>Tour du joueur {{.PlayerToPlay}}</h2>
+  {{end}}
+
+  <div>
+    {{range $i, $v := .IsLineFull}}
+      {{if not $v}}
+        <a href="/play?col={{$i}}"><button>↓ Col {{$i}}</button></a>
+      {{else}}
+        <button disabled>✖</button>
+      {{end}}
+    {{end}}
+  </div>
+
+  <table>
+    {{range .Rows}}
+      <tr>
+        {{range .}}
+          <td class="{{if eq .Player 1}}p1{{else if eq .Player 2}}p2{{end}}"></td>
+        {{end}}
+      </tr>
+    {{end}}
+  </table>
 </body>
 </html>

@@ -2,31 +2,29 @@ package server
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func Start() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/game", http.StatusSeeOther)
+	})
+	http.HandleFunc("/game", StartGame)
 
-	tmpl := template.Must(template.ParseFiles("../client/index.html"))
-
-	http.HandleFunc("/todos", func(w http.ResponseWriter, r *http.Request) {
-		data := TodoPageData{
-			Title: "PUISSANCE 4",
-			Todos: []Todo{
-				{Title: "Learn Go", Done: true},
-				{Title: "Learn Templates", Done: false},
-				{Title: "Build an App", Done: false},
-			},
+	http.HandleFunc("/play", func(w http.ResponseWriter, r *http.Request) {
+		colStr := r.URL.Query().Get("col")
+		col, err := strconv.Atoi(colStr)
+		if err != nil || col < 0 || col >= 7{
+			http.Error(w, "Invalid column", http.StatusBadRequest)
+			return
 		}
 
-		tmpl.Execute(w, data)
+		PlaceCoinLine(col)
+		http.Redirect(w, r, "/game", http.StatusSeeOther)
 	})
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Puissance 4")
-	})
-
+	fmt.Println("Starting server at :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
