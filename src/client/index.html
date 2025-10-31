@@ -17,6 +17,8 @@
   </style>
 </head>
 <body>
+<<<<<<< HEAD
+=======
   <h1>{{.Title}}</h1>
 
   {{if .Win.IsWin}}
@@ -30,14 +32,10 @@
   <div>
     {{range $i, $v := .IsLineFull}}
       {{if not $v}}
-        <a href="/play?col={{$i}}"><button>↓ Col {{add $i 1}}</button></a>
-      {{else}}
-        <button disabled>↓ Col {{add $i 1}}</button>
       {{end}}
     {{end}}
   </div>
 
-<!-- Grille du jeu -->
   <table>
     {{range .Rows}}
       <tr>
@@ -47,6 +45,6 @@
       </tr>
     {{end}}
   </table>
-
+>>>>>>> f04cd06 ([FIX] all)
 </body>
 </html>
