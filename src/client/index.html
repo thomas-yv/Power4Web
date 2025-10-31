@@ -17,8 +17,44 @@
   </style>
 </head>
 <body>
+<<<<<<< HEAD
 =======
 >>>>>>> 95b0677 ([FIX] all)
 >>>>>>> 85fdc4d ([FIX] all)
+=======
+<<<<<<< HEAD
+<h1>puissance 4</h1>
+  <h1>{{.Title}}</h1>
+
+  {{if .Win.IsWin}}
+    <h2>🎉 Joueur {{.Win.Winner}} a gagné !</h2>
+  {{else if .Win.IsDraw}}
+    <h2>🤝 Match nul !</h2>
+  {{else}}
+    <h2>Tour du joueur {{.PlayerToPlay}}</h2>
+  {{end}}
+
+  <div>
+    {{range $i, $v := .IsLineFull}}
+      {{if not $v}}
+        <a href="/play?col={{$i}}"><button>↓ Col {{add $i 1}}</button></a>
+      {{else}}
+        <button disabled>✖</button>
+      {{end}}
+    {{end}}
+  </div>
+
+<!-- Grille du jeu -->
+  <table>
+    {{range .Rows}}
+      <tr>
+        {{range .}}
+          <td class="{{if eq .Player 1}}p1{{else if eq .Player 2}}p2{{end}}"></td>
+        {{end}}
+      </tr>
+    {{end}}
+  </table>
+>>>>>>> 95b0677 ([FIX] all)
+>>>>>>> 9f9804a ([ADD] grille de jeu)
 </body>
 </html>
