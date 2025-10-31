@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -9,7 +8,7 @@ import (
 
 func Start() {
 
-	tmpl := template.Must(template.ParseFiles("../client/index.html"))
+	tmpl := template.Must(template.ParseFiles("./src/client/index.html"))
 
 	http.HandleFunc("/todos", func(w http.ResponseWriter, r *http.Request) {
 		data := TodoPageData{
@@ -20,12 +19,12 @@ func Start() {
 				{Title: "Build an App", Done: false},
 			},
 		}
-
-		tmpl.Execute(w, data)
+tmpl.Execute(w, data)
+		
 	})
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Puissance 4")
+		http.ServeFile(w, r, "./src/client/index.html")
 	})
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
