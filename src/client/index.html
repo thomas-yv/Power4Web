@@ -30,13 +30,14 @@
   <div>
     {{range $i, $v := .IsLineFull}}
       {{if not $v}}
-        <a href="/play?col={{$i}}"><button>↓ Col {{$i}}</button></a>
+        <a href="/play?col={{$i}}"><button>↓ Col {{add $i 1}}</button></a>
       {{else}}
         <button disabled>✖</button>
       {{end}}
     {{end}}
   </div>
 
+<!-- Grille du jeu -->
   <table>
     {{range .Rows}}
       <tr>
@@ -46,5 +47,6 @@
       </tr>
     {{end}}
   </table>
+
 </body>
 </html>

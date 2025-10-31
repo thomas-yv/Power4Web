@@ -10,6 +10,7 @@ func LoadPage(w http.ResponseWriter, r *http.Request, pagePath string) {
 	funcs := template.FuncMap{
 		"add":   func(a, b int) int { return a + b },
 		"minus": func(a, b int) int { return a - b },
+        "eq": func(a, b int) bool { return a == b },
 	}
 
 	base := filepath.Base(pagePath)
