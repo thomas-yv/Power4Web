@@ -11,7 +11,7 @@ type checkForAWinnerStruct struct {
 }
 
 func StartGame(w http.ResponseWriter, r *http.Request) {
-	if IsGameStarted {
+	if !IsGameStarted {
 		loadRows()
 		IsGameStarted = true
 	}
@@ -27,6 +27,7 @@ func NewParty() {
 	}
 	
 func loadRows() {
+	ServerData.Rows = make([][]RowStruct, 6)
 	for i := 0; i <= 6; i++ {
 		row := make([]RowStruct, 7)
 		for y := 0; y <= 7; y++ {
