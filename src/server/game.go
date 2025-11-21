@@ -27,7 +27,6 @@ func NewParty() {
 }
 
 func loadRows() {
-	ServerData.Rows = make([][]RowStruct, 6)
 	for i := 0; i < 6; i++ {
 		row := make([]RowStruct, 7)
 		for y := 0; y < 7; y++ {
@@ -35,10 +34,14 @@ func loadRows() {
 		}
 		ServerData.Rows[i] = row
 	}
+
+	ServerData.IsLineFull = make([]bool, 7)
 }
 
-func PlaceCoinLine(col int) {
+func PlaceCoinLine(col int) { // fonction qui gère les situations de victoire / match nul
 	if ServerData.Win.IsWin || ServerData.Win.IsDraw {
+		loadRows()
+		ServerData.Win = WinStruct{}
 		return
 	}
 
@@ -48,6 +51,7 @@ func PlaceCoinLine(col int) {
 		if win.IsDraw {
 			ServerData.Win.IsDraw = true
 			ServerData.Leaderboard = append(ServerData.Leaderboard, LeaderboardScores{Player: 0, IsWinner: false})
+			loadRows()
 			return
 		}
 
@@ -55,6 +59,7 @@ func PlaceCoinLine(col int) {
 			ServerData.Win.IsWin = true
 			ServerData.Win.Winner = win.Player
 			ServerData.Leaderboard = append(ServerData.Leaderboard, LeaderboardScores{Player: win.Player, IsWinner: true})
+			loadRows()
 			return
 		}
 
