@@ -24,13 +24,13 @@ func NewParty() {
 	ServerData.Win = WinStruct{}
 	loadRows()
 	IsGameStarted = true
-	}
-	
+}
+
 func loadRows() {
 	ServerData.Rows = make([][]RowStruct, 6)
-	for i := 0; i <= 6; i++ {
+	for i := 0; i < 6; i++ {
 		row := make([]RowStruct, 7)
-		for y := 0; y <= 7; y++ {
+		for y := 0; y < 7; y++ {
 			row[y] = RowStruct{Player: 0, IsPlaced: false}
 		}
 		ServerData.Rows[i] = row
@@ -60,12 +60,11 @@ func PlaceCoinLine(col int) {
 
 		if ServerData.PlayerToPlay == 1 {
 			ServerData.PlayerToPlay = 2
-		}else{
+		} else {
 			ServerData.PlayerToPlay = 1
 		}
 	}
 }
-
 
 func appendCoinInsideRow(col int) bool {
 	for row := 5; row >= 0; row-- {
@@ -100,10 +99,10 @@ func checkForAWinner() checkForAWinnerStruct {
 		count := 1
 		for c := 1; c < 7; c++ {
 			if row[c].Player != 0 && row[c].Player == row[c-1].Player {
-				count ++
+				count++
 				if count == 4 {
 					return checkForAWinnerStruct{Player: row[c].Player, IsThereWinner: true}
-			}
+				}
 			} else {
 				count = 1
 			}
@@ -114,10 +113,10 @@ func checkForAWinner() checkForAWinnerStruct {
 		count := 1
 		for r := 1; r < 6; r++ {
 			if ServerData.Rows[r][c].Player != 0 && ServerData.Rows[r][c].Player == ServerData.Rows[r-1][c].Player {
-				count ++
+				count++
 				if count == 4 {
 					return checkForAWinnerStruct{Player: ServerData.Rows[r][c].Player, IsThereWinner: true}
-			}
+				}
 			} else {
 				count = 1
 			}
