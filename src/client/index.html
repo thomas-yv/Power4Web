@@ -10,33 +10,21 @@
                 text-align: center;
                 background: #fafafa;
             }
-            .content {
-                width: fit-content;
-                margin-inline: auto;
-                display: flex;
-                flex-direction: column;
-            }
-            .btns {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 1.3em;
-            }
             table {
                 margin: auto;
                 border-spacing: 0.5em;
                 background-color: #4859cd;
                 padding: 0.3em;
                 border-radius: 2em;
-                border: 0.5em solid #4353c6;
+                border: 0.5em solid #5271de;
             }
             td {
+                background-color: white;
                 width: 60px;
                 height: 60px;
                 padding: 0.4em;
                 border-radius: 50%;
-                border: 0.5em solid #4353c6;
-                background-color: white;
+                border: 0.5em solid #5271de;
             }
             .p1 {
                 background: red;
@@ -61,29 +49,25 @@
         <h2>Tour du joueur {{.PlayerToPlay}}</h2>
         {{end}}
 
-        <div class="content">
-            <div class="btns">
-                {{range $i, $v := .IsLineFull}} {{if not $v}}
-                <a href="/play?col={{$i}}"
-                    ><button>↓ Col {{add $i 1}}</button></a
-                >
-                {{else}}
-                <button disabled>✖</button>
-                {{end}} {{end}}
-            </div>
-
-            <!-- Grille du jeu -->
-            <table>
-                {{range .Rows}}
-                <tr>
-                    {{range .}}
-                    <td
-                        class="{{if eq .Player 1}}p1{{else if eq .Player 2}}p2{{end}}"
-                    ></td>
-                    {{end}}
-                </tr>
-                {{end}}
-            </table>
+        <div>
+            {{range $i, $v := .IsLineFull}} {{if not $v}}
+            <a href="/play?col={{$i}}"><button>↓ Col {{add $i 1}}</button></a>
+            {{else}}
+            <button disabled>✖</button>
+            {{end}} {{end}}
         </div>
+
+        <!-- Grille du jeu -->
+        <table>
+            {{range .Rows}}
+            <tr>
+                {{range .}}
+                <td
+                    class="{{if eq .Player 1}}p1{{else if eq .Player 2}}p2{{end}}"
+                ></td>
+                {{end}}
+            </tr>
+            {{end}}
+        </table>
     </body>
 </html>
