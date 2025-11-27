@@ -33,8 +33,14 @@
                 background: yellow;
             }
             button {
-                margin: 5px;
-                padding: 5px 10px;
+                margin: 10px;
+                padding: 10px 15px;
+                \font-size: 16px;
+                border-radius: 5px;
+                border: none;
+                background-color: #4859cd;
+                color: white;
+                cursor: pointer;
             }
         </style>
     </head>
@@ -53,6 +59,7 @@
             {{range $i, $v := .IsLineFull}} {{if not $v}}
             <a href="/play?col={{$i}}"><button>↓ Col {{add $i 1}}</button></a>
             {{else}}
+
             <button disabled>✖</button>
             {{end}} {{end}}
         </div>
