@@ -16,7 +16,7 @@ func Start() {
 	http.HandleFunc("/play", func(w http.ResponseWriter, r *http.Request) {
 		colStr := r.URL.Query().Get("col")
 		col, err := strconv.Atoi(colStr)
-		if err != nil || col < 0 || col >= 7{
+		if err != nil || col < 0 || col >= 7 {
 			http.Error(w, "Invalid column", http.StatusBadRequest)
 			return
 		}
@@ -25,6 +25,6 @@ func Start() {
 		http.Redirect(w, r, "/game", http.StatusSeeOther)
 	})
 
-	fmt.Println("Starting server at :8080")
+	fmt.Println("Starting server at :http://127.0.0.1:8080/")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
