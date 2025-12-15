@@ -8,8 +8,6 @@ Une implémentation web du jeu classique **Puissance 4 (Connect Four)**, dévelo
 - **Statut** : Projet en phase initiale #BETA (~19 commits, aucune version publiée)
 - **Contributeurs** : [thomas-yv](https://github.com/thomas-yv), [Quentin272727](https://github.com/Quentin272727), [clement444](https://github.com/clement444)
 
----
-
 ## Installation et configuration
 
 ### Prérequis
@@ -35,3 +33,4 @@ Une implémentation web du jeu classique **Puissance 4 (Connect Four)**, dévelo
    ```
 
 Le serveur démarrera par défaut sur http://localhost:8080.
+
